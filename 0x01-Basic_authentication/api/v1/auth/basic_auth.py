@@ -5,6 +5,7 @@
 
 import base64
 import binascii
+from typing import Tuple
 from api.v1.auth import Auth
 
 
@@ -42,3 +43,17 @@ class BasicAuth(Auth):
             # Error from non-base64 data trying to be b64decoded.
             return None
         return None
+
+    def extract_user_credentials(
+            self,
+            decoded_base64_authorization_header: str
+            ) -> Tuple[str, str]:
+        """Extract user credentials
+        """
+        auth_header = decoded_base64_authorization_header
+        if auth_header is not None \
+           and isinstance(auth_header, str) \
+           and ':' in auth_header:
+            creds = auth_header.split(':', 1)
+            return creds[0], creds[1]
+        return None, None
