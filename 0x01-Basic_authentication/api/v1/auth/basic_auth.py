@@ -39,5 +39,6 @@ class BasicAuth(Auth):
                     )
                 return decoded_header.decode('utf-8')
         except binascii.Error:
+            # Error from non-base64 data trying to be b64decoded.
             return None
         return None
