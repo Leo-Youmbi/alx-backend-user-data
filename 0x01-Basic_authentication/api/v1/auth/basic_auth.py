@@ -69,6 +69,8 @@ class BasicAuth(Auth):
             user_email: str,
             user_pwd: str
             ) -> TypeVar('User'):
+        """ Returns the user object from the credentials
+        """
         if isNotNoneAndIsAString(user_email) \
            and isNotNoneAndIsAString(user_pwd):
 
