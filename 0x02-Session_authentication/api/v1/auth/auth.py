@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Authentication module
 """
+import os
 from typing import List, Mapping, TypeVar
 from flask import request
 
@@ -29,3 +30,12 @@ class Auth:
         """Returns current user
         """
         return None
+
+    def session_cookie(self, request=None):
+        if request is None:
+            return None
+
+        SESSION_NAME = os.getenv('SESSION_NAME', None)
+        if SESSION_NAME is None:
+            return None
+        return request.cookies.get(SESSION_NAME)
