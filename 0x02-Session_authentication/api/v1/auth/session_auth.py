@@ -5,7 +5,7 @@
 
 import uuid
 from api.v1.auth import Auth
-from api.v1.utils import isNotNoneAndIsAString
+from api.v1.utils import isNotNoneAndIsAString, user_type
 from models.user import User
 
 
@@ -15,7 +15,7 @@ class SessionAuth(Auth):
 
     user_id_by_session_id = {}
 
-    def create_session(self, user_id: str = None) -> str:
+    def create_session(self, user_id: str = None) -> str | None:
         """Create a new session
 
         Args:
@@ -30,15 +30,20 @@ class SessionAuth(Auth):
             return session_id
         return None
 
-    def user_id_for_session_id(self, session_id: str = None) -> str:
+    def user_id_for_session_id(self, session_id: str = None) -> str | None:
         """Returns the user id associated with the given session
         """
         if isNotNoneAndIsAString(session_id):
             return type(self).user_id_by_session_id.get(session_id)
         return None
 
-    def current_user(self, request=None):
+    def current_user(self, request=None) -> user_type | None:
         """Returns the current user"""
         session_id = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(session_id)
-        return User.get(user_id)
+        if session_id is not None:
+            user_id = self.user_id_for_session_id(session_id)
+
+            if user_id is not None:
+                return User.get(user_id)
+
+        return None
