@@ -28,3 +28,10 @@ class SessionAuth(Auth):
             type(self).user_id_by_session_id.__setitem__(session_id, user_id)
             return session_id
         return None
+
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """Returns the user id associated with the given session
+        """
+        if isNotNoneAndIsAString(session_id):
+            return type(self).user_id_by_session_id.get(session_id)
+        return None
