@@ -26,7 +26,7 @@ class SessionAuth(Auth):
         """
         if isNotNoneAndIsAString(user_id):
             session_id = uuid.uuid4()
-            type(self).user_id_by_session_id.__setitem__(session_id, user_id)
+            type(self).user_id_by_session_id.__setitem__(str(session_id), user_id)
             return session_id
         return None
 
