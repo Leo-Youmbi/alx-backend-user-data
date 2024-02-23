@@ -3,6 +3,7 @@
 """
 
 
+from typing import TypeVar
 import uuid
 from api.v1.auth import Auth
 from api.v1.utils import isNotNoneAndIsAString, user_type
@@ -37,7 +38,7 @@ class SessionAuth(Auth):
             return type(self).user_id_by_session_id.get(session_id)
         return None
 
-    def current_user(self, request=None) -> user_type | None:
+    def current_user(self, request=None) -> TypeVar('User') | None:
         """Returns the current user"""
         session_id = self.session_cookie(request)
         if session_id is not None:
