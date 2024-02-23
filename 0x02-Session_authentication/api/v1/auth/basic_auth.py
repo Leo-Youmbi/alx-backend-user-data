@@ -7,7 +7,7 @@ import base64
 import binascii
 from typing import Any, Tuple, TypeVar
 from api.v1.auth import Auth
-from api.v1.utils import isNotNoneAndIsAString, user_type
+from api.v1.utils import isNotNoneAndIsAString
 from models.user import User
 
 
@@ -62,7 +62,7 @@ class BasicAuth(Auth):
             self,
             user_email: str,
             user_pwd: str
-            ) -> user_type | None:
+            ) -> TypeVar('User') | None:
         """ Returns the user object from the credentials
         """
         if isNotNoneAndIsAString(user_email) \
@@ -78,7 +78,7 @@ class BasicAuth(Auth):
                 return users[0]
         return None
 
-    def current_user(self, request=None) -> user_type:
+    def current_user(self, request=None) -> TypeVar('User'):
         """Retrieves the user from a request.
         """
         auth_header = self.authorization_header(request)

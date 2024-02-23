@@ -3,7 +3,6 @@
 """
 import os
 from typing import List
-from api.v1.utils import user_type
 
 
 class Auth:
@@ -26,7 +25,7 @@ class Auth:
             return request.headers.get('Authorization')
         return None
 
-    def current_user(self, request=None) -> user_type:
+    def current_user(self, request=None):
         """Returns current user
         """
         return None
