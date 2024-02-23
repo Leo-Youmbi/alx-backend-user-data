@@ -2,8 +2,8 @@
 """Authentication module
 """
 import os
-from typing import List, Mapping, TypeVar
-from flask import request
+from typing import List
+from api.v1.utils import user_type
 
 
 class Auth:
@@ -26,12 +26,12 @@ class Auth:
             return request.headers.get('Authorization')
         return None
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> user_type:
         """Returns current user
         """
         return None
 
-    def session_cookie(self, request=None):
+    def session_cookie(self, request=None) -> str | None:
         """Gets the session id from cookie
         """
         if request is None:
