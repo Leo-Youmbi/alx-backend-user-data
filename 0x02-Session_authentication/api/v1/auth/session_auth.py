@@ -16,7 +16,7 @@ class SessionAuth(Auth):
 
     user_id_by_session_id = {}
 
-    def create_session(self, user_id: str = None) -> str | None:
+    def create_session(self, user_id: str = None) -> str:
         """Create a new session
 
         Args:
@@ -31,7 +31,7 @@ class SessionAuth(Auth):
             return session_id
         return None
 
-    def user_id_for_session_id(self, session_id: str = None) -> str | None:
+    def user_id_for_session_id(self, session_id: str = None) -> str:
         """Returns the user id associated with the given session
         """
         if isNotNoneAndIsAString(session_id):
