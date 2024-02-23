@@ -7,14 +7,8 @@ import base64
 import binascii
 from typing import Any, Tuple, TypeVar
 from api.v1.auth import Auth
+from api.v1.utils import isNotNoneAndIsAString
 from models.user import User
-
-
-def isNotNoneAndIsAString(variable: Any) -> bool:
-    """Check if variable is not None and is a string
-    """
-    return variable is not None \
-        and isinstance(variable, str)
 
 
 class BasicAuth(Auth):
