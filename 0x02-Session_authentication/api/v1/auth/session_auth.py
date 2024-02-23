@@ -3,10 +3,9 @@
 """
 
 
-from typing import TypeVar
 import uuid
 from api.v1.auth import Auth
-from api.v1.utils import isNotNoneAndIsAString, user_type
+from api.v1.utils import isNotNoneAndIsAString
 from models.user import User
 
 
