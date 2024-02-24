@@ -26,7 +26,10 @@ class SessionAuth(Auth):
         """
         if isNotNoneAndIsAString(user_id):
             session_id = uuid.uuid4()
-            type(self).user_id_by_session_id.__setitem__(str(session_id), user_id)
+            type(self).user_id_by_session_id.__setitem__(
+                str(session_id),
+                user_id
+                )
             return session_id
         return None
 
@@ -38,7 +41,7 @@ class SessionAuth(Auth):
         return None
 
     def current_user(self, request=None) -> User:
-        """Returns the current user
+        """Retrieves the user associated with the request.
         """
         session_id = self.session_cookie(request)
         if session_id is not None:
