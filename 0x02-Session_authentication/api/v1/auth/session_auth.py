@@ -3,6 +3,7 @@
 """
 
 
+import os
 import uuid
 from api.v1.auth import Auth
 from api.v1.utils import isNotNoneAndIsAString
@@ -48,3 +49,18 @@ class SessionAuth(Auth):
                 return User.get(user_id)
 
         return None
+
+    def destroy_session(self, request=None):
+        """Delete session
+        """
+        if request is None:
+            return False
+
+        if self.session_cookie(request) is None:
+            return False
+
+        session_id = self.session_cookie(request)
+        if self.user_id_for_session_id(session_id) is None:
+            return False
+
+        del self.user_id_by_session_id[session_id]
