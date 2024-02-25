@@ -23,7 +23,7 @@ class SessionAuth(Auth):
             user_id (str, optional): The id of a user. Defaults to None.
 
         Returns:
-            str: the id of the newly created id
+            str: the id of the newly created session
         """
         if isNotNoneAndIsAString(user_id):
             session_id = str(uuid.uuid4())
