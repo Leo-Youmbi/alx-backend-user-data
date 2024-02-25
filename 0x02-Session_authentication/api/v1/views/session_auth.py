@@ -46,6 +46,10 @@ def session_login():
         strict_slashes=False
         )
 def session_logout():
+    """DELETE /api/v1/auth_session/logout
+    Return:
+      - An empty JSON object.
+    """
 
     from api.v1.app import auth
 
