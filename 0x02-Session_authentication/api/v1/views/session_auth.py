@@ -10,6 +10,10 @@ from models.user import User
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def session_login():
+    """POST /api/v1/auth_session/login
+    Return:
+      - JSON representation of a User object.
+    """
     user_email = request.form.get('email')
     user_pwd = request.form.get('password')
 
